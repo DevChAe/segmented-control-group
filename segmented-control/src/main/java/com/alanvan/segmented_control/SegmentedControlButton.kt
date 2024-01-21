@@ -15,10 +15,12 @@ class SegmentedControlButton @JvmOverloads constructor(
 
     init {
         textAlignment = View.TEXT_ALIGNMENT_CENTER
+        /*
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             setTextAppearance(R.style.SegmentedButtonTextAppearance)
         } else {
             setTextAppearance(context, R.style.SegmentedButtonTextAppearance)
         }
+        */
     }
 }

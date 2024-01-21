@@ -213,6 +213,9 @@ class SegmentedControlGroup @JvmOverloads constructor(
             }
         }
 
+        if (getChildAt(newPositionIndex).isEnabled.not()) {
+            return
+        }
         animateButtonMovement(newPositionIndex = newPositionIndex, isDragging = true)
     }
 

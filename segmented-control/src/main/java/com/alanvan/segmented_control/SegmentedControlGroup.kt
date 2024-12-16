@@ -128,6 +128,19 @@ class SegmentedControlGroup @JvmOverloads constructor(
         this.selectedOptionCallback = callback
     }
 
+    fun updateOptionButtonEvent() {
+        for (index in 0 until childCount) {
+            val optionButton = getChildAt(index)
+            optionButton.isClickable = true
+
+            optionButton.setOnClickListener {
+                animateButtonMovement(newPositionIndex = index, onAnimationEndCallback = {
+                    selectedOptionCallback?.invoke(index)
+                })
+            }
+        }
+    }
+
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         for (index in 0 until childCount) {

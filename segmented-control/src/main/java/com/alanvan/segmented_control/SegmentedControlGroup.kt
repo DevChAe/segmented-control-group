@@ -51,6 +51,7 @@ class SegmentedControlGroup @JvmOverloads constructor(
 
     private var setSelectedIndexCallback: (() -> Unit)? = null
     private var selectedOptionCallback: ((Int) -> Unit)? = null
+    private var optionButtonOnClickCallback: ((Int) -> Unit)? = null
 
     companion object {
         const val INVALID_POINTER_ID = -1
@@ -134,11 +135,16 @@ class SegmentedControlGroup @JvmOverloads constructor(
             optionButton.isClickable = true
 
             optionButton.setOnClickListener {
+                optionButtonOnClickCallback?.invoke(index)
                 animateButtonMovement(newPositionIndex = index, onAnimationEndCallback = {
                     selectedOptionCallback?.invoke(index)
                 })
             }
         }
+    }
+
+    fun setOptionButtonOnClickCallback(callback: ((Int) -> Unit)) {
+        this.optionButtonOnClickCallback = callback
     }
 
     override fun onAttachedToWindow() {
@@ -149,6 +155,7 @@ class SegmentedControlGroup @JvmOverloads constructor(
             optionButton.isClickable = true
 
             optionButton.setOnClickListener {
+                optionButtonOnClickCallback?.invoke(index)
                 animateButtonMovement(newPositionIndex = index, onAnimationEndCallback = {
                     selectedOptionCallback?.invoke(index)
                 })
